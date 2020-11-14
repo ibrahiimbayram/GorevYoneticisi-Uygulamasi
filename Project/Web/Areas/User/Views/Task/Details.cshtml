@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var it in ViewBag.detail)
+{
+    <div class="container">
+        <br />
+        <div class="form-group text-center"><h1>@it.Title</h1></div>
+        <br />
+        <p class="card-text">
+            <div>
+                <label>Başlangıç Tarihi :     @it.StartDate.ToString("dd MM yyyy")</label>
+                <br />
+                <label>Bitiş Tarihi :     @it.FinishDate.ToString("dd MM yyyy")</label>
+                <br />
+
+            </div>
+            <br /><br />
+            <div class="metin">
+
+                @it.ShortDescription
+                <br />
+
+                @Html.Raw(@it.Description)
+
+            </div>
+        </p>
+
+    </div>}

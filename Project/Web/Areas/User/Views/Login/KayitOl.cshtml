@@ -1,0 +1,50 @@
+﻿@model Entity.DTOS.AppUserDtos.AppUserSignUp
+@{
+    ViewData["Title"] = "KayitOl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Kayıt Ol</h1>
+<br />
+<br />
+<form class="lead mx-auto form-control-lg" method="post">
+    <div class="form-group row">
+        <label class="col-3 col-form-label">Ad : </label>
+        <div class="col-9">
+            <input type="text" name="Name" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-3 col-form-label">Soyad : </label>
+        <div class="col-9">
+            <input type="text" name="SurName" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-3 col-form-label">Kullanıcı Adı : </label>
+        <div class="col-9">
+            <input type="text" name="UserName" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-3 col-form-label">Şifre : </label>
+        <div class="col-9">
+            <input type="password" name="Password" class="form-control">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+
+        </div>
+        <div class="col-md-5">
+
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Kaydol" class="btn btn-info">
+            <a asp-action="Index" class="btn btn-danger">Vazgeç</a>
+        </div>
+    </div>
+
+</form>
+

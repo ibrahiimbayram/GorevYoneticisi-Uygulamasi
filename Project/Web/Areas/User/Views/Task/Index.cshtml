@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Görevler</h2>
+<br />
+<form asp-action="Ara" method="post">
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <div class="form-control-sm">
+                <label class="form-control-sm"><h4>Görev Tarihi</h4></label>
+
+                <select class="form-control select-dropdown warning" id="TaskDate" name="TaskDate">
+                    @foreach (var item in ViewBag.sure)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+
+
+                    }
+                </select>
+
+                <input class="btn btn-info btn-sm pull-right" type="submit" name="TaskDate" id="TaskDate" value="Ara" />
+
+            </div>
+        </div>
+    </div>
+</form>
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">Kısa Aıklama</th>
+                <th scope="col">Başlangıç Tarihi</th>
+                @*<th scope="col">Kalan Süre</th>*@
+                <th scope="col">Bitiş Tarihi</th>
+                <th scope="col">Detay</th>
+                <th scope="col">Sil</th>
+                <th scope="col">Düzenle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var it in ViewBag.veriler)
+            {
+                <tr>
+                    <th scope="row">@it.Id</th>
+                    <td>@it.Title</td>
+                    <td>@it.ShortDescription</td>
+                    <td>@it.StartDate.ToString("dd MM yyyy")</td>
+                    @*<td>1 Gün</td>*@
+                    <td>@it.FinishDate.ToString("dd MM yyyy")</td>
+                    <td><a class="btn btn-info btn-sm" asp-action="Detail" asp-route-id="@it.Title">Detay</a></td>
+                    <td><a class="btn btn-dark btn-sm" asp-action="DeleteTasks" asp-route-id="@it.Id">Sil</a></td>
+                    <td><a class="btn btn-success btn-sm" asp-action="UpdateTasksIndex" asp-route-id="@it.Id">Düzenle</a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <div class="text-center">
+        <ul class="pagination background-color=" white"">
+
+            @for (int i = 1; i <= ViewBag.toplamsayfa; i++)
+            {
+                <li class="page-item @(ViewBag.AktifSayfa==i?"active":"")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+
+<script>
+    function degergoster(id) {
+        var selectkutu = document.getElementById('TaskDate');
+        var selectkutu_value = selectkutu.options[selectkutu.selectedIndex].value;
+        id = selectkutu_value;
+    }
+
+
+</script>

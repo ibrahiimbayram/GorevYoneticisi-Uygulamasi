@@ -1,0 +1,66 @@
+﻿@model Entity.DTOS.TaskDtos.TaskUpdateDto
+@{
+    ViewData["Title"] = "UpdateTasksIndex";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
+
+
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <br /><br />
+    <h2 class="text-center"> Görev Güncelle</h2>
+    <div class="form-group">
+        <label class="form-control-sm"><h4>Görev Başlığı</h4></label>
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        <div>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-sm"><h4>Kısa Açıklama</h4></label>
+        @Html.TextAreaFor(model => model.ShortDescription, new { @class = "form-control" })
+        <div>
+            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-sm"><h4>Görev Tarihi</h4></label>
+        <select class="form-control select-dropdown warning" id="TaskDate" name="TaskDate">
+            @foreach (var item in ViewBag.sure)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-control-sm"><h4>Görev Detayı</h4></label>
+        @Html.TextAreaFor(model => model.Description, new { @id = "editor1" })
+        <script type="text/javascript">
+            var editor = CKEDITOR.instances['editor1'];
+            if (editor) { editor.destroy(true); }
+            CKEDITOR.replace('editor1', {
+                enterMode: CKEDITOR.ENTER_BR,
+            });
+            CKFinder.setupCKEditor(null, '@Url.Content("~/ckeditor/ckfinder/")');
+        </script>
+        <div>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="card-footer">
+        <input type="submit" class="btn btn-success pull-right" value="Güncelle" />
+    </div>
+
+
+    <br /><br /><br /><br />
+</form>
+
+

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "GetTodayTask";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Günlük Görevler</h2>
+<br />
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Başlık</th>
+            <th scope="col">Kısa Aıklama</th>
+            <th scope="col">Başlangıç Tarihi</th>
+            @*<th scope="col">Kalan Süre</th>*@
+            <th scope="col">Bitiş Tarihi</th>
+            <th scope="col">Detay</th>
+            <th scope="col">Sil</th>
+            <th scope="col">Düzenle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var it in ViewBag.veriler)
+        {
+            <tr>
+                <th scope="row">@it.Id</th>
+                <td>@it.Title</td>
+                <td>@it.ShortDescription</td>
+                <td>@it.StartDate.ToString("dd MM yyyy")</td>
+                @*<td>1 Gün</td>*@
+                <td>@it.FinishDate.ToString("dd MM yyyy")</td>
+                <td><a class="btn btn-info btn-sm" asp-action="Detail" asp-route-id="@it.Title">Detay</a></td>
+                <td><a class="btn btn-dark btn-sm" asp-action="DeleteNews" asp-route-id="@it.Id">Sil</a></td>
+                <td><a class="btn btn-success btn-sm" asp-action="UpdateNews" asp-route-id="@it.Id">Düzenle</a></td>
+            </tr>
+}
+
+    </tbody>
+</table>
+<div class="text-center">
+    <ul class="pagination background-color=" white"">
+
+        @for (int i = 1; i <= ViewBag.toplamsayfa; i++)
+        {
+            <li class="page-item @(ViewBag.AktifSayfa==i?"active":"")">
+                <a class="page-link" asp-action="PendingNews" asp-route-page="@i">@i</a>
+            </li>
+}
+
+    </ul>
+</div>

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var it in ViewBag.detail)
+{
+    <div class="container">
+
+        <div class="text-center">
+            @*<img src="~/img/@it.DetailImagePath" width="800px" height="420" />*@
+        </div>
+
+        <br />
+        <div class="form-group text-center"><h1>@it.Title</h1></div>
+        <br />
+        <p class="card-text">
+            <div>
+                <label>Başlangıç Tarihi :     @it.StartDate.ToString("dd MM yyyy")</label>
+                <br />
+                <label>Bitiş Tarihi :     @it.FinishDate.ToString("dd MM yyyy")</label>
+                <br />
+                @if (ViewBag.kalangun == 0)
+                {
+                    <label>Kalan Süre : Son Gün</label>
+                }
+                else if (ViewBag.kalangun < 0)
+                {
+                    <font color="red">
+                        <label>Görev Gününde Tamamlanmadı</label>
+                    </font>
+
+                }
+                else
+                {
+                    <label>Kalan Süre : @ViewBag.kalangun Gün</label>
+                }
+
+            </div>
+            <br /><br />
+            <div class="metin">
+
+                @it.ShortDescription
+                <br />
+
+                @Html.Raw(@it.Description)
+
+            </div>
+        </p>
+        <td><a class="btn btn-info btn-sm pull-right" asp-action="Completed" asp-route-id="@it.Id">Tamamlandı</a></td>
+
+    </div>}
+
